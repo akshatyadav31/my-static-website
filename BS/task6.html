@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .required {
+            color: red;
+            font-size: 0.8em;
+        }
+        .form-control:invalid {
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Registration Form</h2>
+    <form id="registration-form">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" required>
+            <div class="required" id="name-error" style="display:none;">Name is required</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" required>
+            <div class="required" id="email-error" style="display:none;">Email is required</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" required>
+            <div class="required" id="password-error" style="display:none;">Password is required</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="hobbies">Hobbies</label>
+            <select class="form-control" id="hobbies" required>
+                <option value="">Select...</option>
+                <option value="reading">Reading</option>
+                <option value="traveling">Traveling</option>
+                <option value="gaming">Gaming</option>
+            </select>
+            <div class="required" id="hobbies-error" style="display:none;">Hobbies is required</div>
+        </div>
+
+        <button type="submit" class="btn btn-danger">Submit</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('registration-form').addEventListener('submit', function(event) {
+        let isValid = true;
+
+        const fields = [
+            { id: 'name', error: 'name-error' },
+            { id: 'email', error: 'email-error' },
+            { id: 'password', error: 'password-error' },
+            { id: 'hobbies', error: 'hobbies-error' }
+        ];
+
+        fields.forEach(field => {
+            const input = document.getElementById(field.id);
+            const errorDiv = document.getElementById(field.error);
+            if (!input.value.trim()) {
+                isValid = false;
+                errorDiv.style.display = 'block';
+            } else {
+                errorDiv.style.display = 'none';
+            }
+        });
+
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+</script>
+
+</body>
+</html>
